@@ -35,4 +35,15 @@ public class Transaction {
     public boolean isSuboradd() {
         return suboradd;
     }
+    public void DatabaseforTransaction() {
+        System.out.println("Initial Balance: " + initbal);
+        if (suboradd == true) {
+            System.out.println("Withdrawal Balance: -" + balance);
+        }
+        else {
+            System.out.println("Deposit Balance: +" + balance);
+        }
+        System.out.println("Memo: " + memo);
+        System.out.println();
+    }
 }

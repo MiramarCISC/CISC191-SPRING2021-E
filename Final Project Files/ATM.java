@@ -17,7 +17,7 @@ public class ATM {
                 choice = a.nextLine();
                 if (choice.equals("New Admin")) {
                     newAdmin();
-                }
+                } //52737
                 else {
                     Admin();
                 }
@@ -66,7 +66,7 @@ public class ATM {
         String firstname = a.nextLine();
         System.out.println("What is your last name?");
         String lastname = a.nextLine();
-        System.out.println("What 4 digit pin do you want to set for your account?");
+        System.out.println("What PIN do you want to set for your account?");
         int pin = a.nextInt();
         a.nextLine();
         System.out.println("How much would you like to deposit into your Checking account?");
@@ -111,8 +111,143 @@ public class ATM {
      *
      */
     public static void Customer() {
+        Scanner a = new Scanner(System.in);
+        System.out.println("Bank?");
+        String bankname = a.nextLine();
+        int bankcheck = 0;
+        int bankid = 0;
+        for (int i = 0; i < banks.size(); i++) {
+            if (banks.get(i).getBankName().equals(bankname)) {
+                bankid = i;
+                bankcheck = 1;
+                break;
+            }
+        }
+        if (bankcheck == 0) {
+            System.out.println("Error: Invalid Bank");
+            return;
+        }
+        System.out.println("Customer ID?");
+        int custid = a.nextInt();
+        System.out.println("PIN?");
+        int custpin = a.nextInt();
+        a.nextLine();
+        int custcheck = 0;
+        int custindex = 0;
+        for (int i = 0; i < banks.size(); i++) {
+            if (banks.get(bankid).getCustomers().get(i).getCustomerID().equals(custid)) {
+                if (banks.get(bankid).getCustomers().get(i).getPin() == (custpin)) {
+                    custcheck = 1;
+                    custindex = i;
+                    break;
+                }
+            }
+        }
+        if (custcheck == 0) {
+            System.out.println("Error: Wrong ID or PIN");
+            return;
+        }
+        int stopper = 0;
+        while(stopper == 0) {
+            System.out.println("Welcome " + banks.get(bankid).getCustomers().get(custindex).getFirstName() + "!" + ". Please choose the number corresponding to your desired option.");
+            System.out.println("1). Withdraw balance from an account.");
+            System.out.println("2). Deposit balance into an account.");
+            System.out.println("3). Change PIN.");
+            System.out.println("4). Check Transaction details");
+            int choice = a.nextInt();
+            a.nextLine();
+            if (choice == 1) {
+                ArrayList<Account> lister = banks.get(bankid).getCustomers().get(custindex).getAccount();
+                System.out.println("To which account would you like to withdraw from? Checking or Savings?");
+                String checker = a.nextLine();
+                int select = -1;
+                if (checker.equals("Checking")) {
+                    select = 0;
+                }
+                else {
+                    select = 1;
+                }
+                System.out.println("How much do you want to withdraw?");
+                double amount = a.nextDouble();
+                a.nextLine();
+
+                if (lister.get(select).checkAmount(amount) == false) {
+                    System.out.println("Error: Insufficient Funds to withdraw.");
+                    return;
+                }
+
+                System.out.println("What is the memo?");
+                String memo = a.nextLine();
+
+                lister.get(select).newTransaction(new Transaction(lister.get(select).getBalance(),lister.get(select).getBalance() - amount, amount, memo, true));
+
+            }
+            if (choice == 2) {
+                ArrayList<Account> lister = banks.get(bankid).getCustomers().get(custindex).getAccount();
+                System.out.println("To which account would you like to deposit to? Checkings or Savings?");
+                String checker = a.nextLine();
+                int select = -1;
+                if (checker.equals("Checkings")) {
+                    select = 0;
+                }
+                else {
+                    select = 1;
+                }
+                System.out.println("How much do you want to deposit?");
+                double amount = a.nextDouble();
+                a.nextLine();
+
+                System.out.println("What is the memo?");
+                String memo = a.nextLine();
+
+                lister.get(select).newTransaction(new Transaction(lister.get(select).getBalance(),lister.get(select).getBalance() + amount, amount, memo, false));
+
+            }
+            if (choice == 3) {
+                System.out.println("What is your current PIN?");
+                int pincheck = a.nextInt();
+                a.nextLine();
+                if (pincheck == custpin) {
+                    System.out.println("What is the new PIN?");
+                    int newPIN = a.nextInt();
+                    a.nextLine();
+                    banks.get(bankid).getCustomers().get(custindex).setPin(newPIN);
+                    custpin = banks.get(bankid).getCustomers().get(custindex).getPin();
+                    System.out.println("PIN change is successful.");
+                }
+                else {
+                    System.out.println("Error: Incorrect PIN");
+                }
+
+            }
+            if (choice == 4) {
+                System.out.println("Which Account would you like to see transaction details for? Checking or Savings");
+                String option = a.nextLine();
+                int checker = 0;
+                ArrayList<Account> lister = banks.get(bankid).getCustomers().get(custindex).getAccount();
+                if (option.equals("Checking")) {
+                    for (int i = 0; i < lister.get(0).getTransactions().size(); i++) {
+                        lister.get(0).getTransactions().get(i).DatabaseforTransaction();
+                    }
+                }
+                else {
+                    for (int i = 0; i < lister.get(1).getTransactions().size(); i++) {
+                        lister.get(1).getTransactions().get(i).DatabaseforTransaction();
+                    }
+                }
+
+            }
+            System.out.println("Would you like to end your session? Type Yes or No.");
+            String option = a.nextLine();
+            if (option.equals("Yes")) {
+                stopper = 1;
+                return;
+            }
+        }
+
 
     }
+
 
     public static void newAdmin() {
         Scanner a = new Scanner(System.in);
