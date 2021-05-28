@@ -1,1 +1,6 @@
 In order to run this program, import the files and run the ATM class through the IDE
+ATM.java - Acts as the ATM for this whole project and is the "brain" of the program - Prajit Mohan, Ali Ahmed, Abdulrahman Sinjab,  Timothy Moua, and Brian Har 
+Account.java - Stores informations regarding an account that is associated with a Customer - Abdulrahman Sinjab
+Bank.java - Stores informations regarding Banks registered with the program/ATM - Brian Har
+Transaction.java - Stores informations regarding transactions that have been carried out by the ATM - Ali Ahmed
+User.java - Stores and modifies information relating to customers that are registered to a bank - Prajit Mohan
