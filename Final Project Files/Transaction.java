@@ -1,3 +1,4 @@
+// Transaction.java - Stores informations regarding transactions that have been carried out by the ATM - Ali Ahmed
 package edu.sdccd.cisc191;
 
 public class Transaction {
