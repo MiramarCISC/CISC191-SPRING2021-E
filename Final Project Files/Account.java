@@ -1,3 +1,4 @@
+// Account.java - Stores informations regarding an account that is associated with a Customer - Abdulrahman Sinjab
 package edu.sdccd.cisc191;
 import java.util.ArrayList;
 
