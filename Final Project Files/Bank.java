@@ -1,3 +1,4 @@
+//Bank.java - Stores informations regarding Banks registered with the program/ATM - Brian Har
 package edu.sdccd.cisc191;
 import java.util.ArrayList;
 
