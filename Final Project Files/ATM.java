@@ -1,3 +1,4 @@
+// ATM.java - Acts as the ATM for this whole project and is the "brain" of the program - Prajit Mohan, Ali Ahmed, Abdulrahman Sinjab,  Timothy Moua, and Brian Har 
 package edu.sdccd.cisc191;
 import java.util.ArrayList;
 import java.util.Scanner;
