@@ -1,3 +1,4 @@
+// User.java - Stores and modifies information relating to customers that are registered to a bank - Prajit Mohan
 package edu.sdccd.cisc191;
 import java.util.ArrayList;
 
